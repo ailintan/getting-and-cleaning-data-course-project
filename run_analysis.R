@@ -11,30 +11,30 @@ temp <- tempfile()
 download.file(downloadURL, temp)
 data <- read.csv(unzip(temp),header = TRUE, stringsAsFactors = FALSE) 
 
-# Read subject files and merge to allSubject
-trainSubject <- read.table("./UCI HAR Dataset/train/subject_train.txt")
-testSubject  <- read.table("./UCI HAR Dataset/test/subject_test.txt")
+# Read both train and test subject files and merge to allSubject
+trainSubject <- read.table("../UCI HAR Dataset/train/subject_train.txt")
+testSubject  <- read.table("../UCI HAR Dataset/test/subject_test.txt")
 allSubject <- rbind(trainSubject,testSubject)
 setnames(allSubject, "V1", "subject")
 
-# Read Y files and merge to allY
-trainY <- read.table("./UCI HAR Dataset/train/Y_train.txt")
-testY  <- read.table("./UCI HAR Dataset/test/Y_test.txt")
+# Read both train and test Y files and merge to allY
+trainY <- read.table("../UCI HAR Dataset/train/Y_train.txt")
+testY  <- read.table("../UCI HAR Dataset/test/Y_test.txt")
 allY <- rbind(trainY,testY)
 setnames(allY, "V1", "activity")
 
 #merge allSubject +  allY  to allSubjectY
 allSubjectY<- cbind(allSubject, allY) 
 
-# Read X files and merge to allX
-trainX <- read.table("./UCI HAR Dataset/train/X_train.txt")
-testX  <- read.table("./UCI HAR Dataset/test/X_test.txt")
+# Read both train and test X files and merge to allX
+trainX <- read.table("../UCI HAR Dataset/train/X_train.txt")
+testX  <- read.table("../UCI HAR Dataset/test/X_test.txt")
 allX <- rbind(trainX,testX)
 
 ##### 2. Extracts only the measurements on the mean and standard deviation for each measurement. ######
 
 # set V1 of allX to featurename of dataFeatures
-dataFeatures <- read.table("./UCI HAR Dataset/features.txt")
+dataFeatures <- read.table("../UCI HAR Dataset/features.txt")
 colnames(allX) <- dataFeatures[,2]
 
 #merge allX and allSubjectY to allData
